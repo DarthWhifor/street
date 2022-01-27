@@ -94,15 +94,14 @@ class UserController extends Controller
                     $person = new Person();
                     $person->title = $importData[0][0];
                     $person->first_name = strlen($importData[0][1]) > 1 ? $importData[0][1] : '';
-                    $person->initial = $oneLetter ?? '';
+                    $person->initial = $oneLetter;
                     $person->last_name = $importData[0][3] ?? $importData[0][2];
                     $person->save();
                 }
             }
             return back()->with('success', $j . ' records successfully uploaded!');
-        } else {
-            return back()->with('error', 'Please, select CSV file!');
         }
+        return back()->with('error', 'Please, select CSV file!');
     }
 
     public function checkUploadedFileProperties($extension, $fileSize)
